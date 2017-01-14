@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Capitulo_7
+namespace Diccionario
 {
     public partial class Form1 : Form
     {
@@ -18,14 +18,16 @@ namespace Capitulo_7
         }
 
         Dictionary<string, string> hash = new Dictionary<string, string>();
-
         private void addBtn_Click(object sender, EventArgs e)
         {
-            hash.Add(nameBox.Text, telBox.Text);
-            if (String.IsNullOrEmpty(nameBox.Text) || String.IsNullOrEmpty(telBox.Text))
+            if (String.IsNullOrEmpty(nameBox.Text) || String.IsNullOrEmpty(descBox.Text))
                 MessageBox.Show("Ambos campos tienen que ser llenados");
             else
-                agendaBox.Items.Add(String.Format("{0}\t\t\t{1}", nameBox.Text, telBox.Text));
+            {
+                hash.Add(nameBox.Text, descBox.Text);
+                hashBox.Items.Add(String.Format("{0}\t\t\t{1}", data.Key, data.Value));
+
+            }
         }
     }
 }

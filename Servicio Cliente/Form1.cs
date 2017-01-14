@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Capitulo_7
+namespace Servicio_Cliente
 {
     public partial class Form1 : Form
     {
@@ -17,15 +17,21 @@ namespace Capitulo_7
             InitializeComponent();
         }
 
-        Dictionary<string, string> hash = new Dictionary<string, string>();
+        Queue<string> client = new Queue<string>();
+        private void atenderBtn_Click(object sender, EventArgs e)
+        {
+            queueBox.Items.RemoveAt(0);
+        }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            hash.Add(nameBox.Text, telBox.Text);
-            if (String.IsNullOrEmpty(nameBox.Text) || String.IsNullOrEmpty(telBox.Text))
-                MessageBox.Show("Ambos campos tienen que ser llenados");
-            else
-                agendaBox.Items.Add(String.Format("{0}\t\t\t{1}", nameBox.Text, telBox.Text));
+            client.Enqueue(clientBox.Text);
+
+            foreach (string s in client)
+            {
+                queueBox.Items.Add(s);
+            }
+            client.Dequeue();
         }
     }
 }
